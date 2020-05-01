@@ -10,6 +10,7 @@ function AddPara(ftext) {
       ftext = "A p is append in the main.";
     }
     $("main").append("<p>" + ftext + "</p>");
+    $("p:last-child").click();
   } else {
     console.log("We reached the max (5) paragraph number!");
   }
@@ -40,8 +41,8 @@ colors.forEach(function (ccolor) {
   $(".box:last-child").css("background", ccolor);
 });
 
-for (let i = 0; i < 100; i++) {
-  console.log("(" + (i + 1) + ") Nem fogok csalni a vizsgán!");
+for (let i = 1; i <= 10; i++) {
+  console.log(i);
 }
 
 console.log("Script file is loaded.");

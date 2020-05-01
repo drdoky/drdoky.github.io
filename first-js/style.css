@@ -1,0 +1,17 @@
+p {
+  color: red;
+}
+
+.blue {
+  color: lightblue;
+  background: blue;
+}
+
+#box-container {
+  display: flex;
+}
+
+.box {
+  width: 100px;
+  height: 100px;
+}

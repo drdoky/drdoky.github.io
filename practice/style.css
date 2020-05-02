@@ -1,0 +1,27 @@
+.h1 {
+  color: orange;
+}
+
+.h2 {
+  color: purple;
+}
+
+.lorem {
+  width: 500px;
+}
+
+ul {
+  list-style: square;
+}
+
+ol {
+  list-style-type: upper-roman;
+}
+
+.mag {
+  color: magenta;
+}
+
+span {
+  text-decoration: underline;
+}

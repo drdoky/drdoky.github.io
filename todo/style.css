@@ -1,7 +1,31 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  background: linear-gradient(170deg, #00c9ff, #92fe9d);
+  /*background: linear-gradient(170deg, #0072ff, #00c6ff);*/
+}
+
+#container {
+  width: 300px;
+}
+
+#inTodo {
+  width: 100%;
+}
+
 .todoItem, #btnTodo {
+  width: 100%;
   cursor: pointer;
 }
 
-.checked {
+.checked, .checked:hover {
   text-decoration: line-through;
 }

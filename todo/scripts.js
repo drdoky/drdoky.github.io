@@ -21,7 +21,7 @@ $(function() {
   $("#sortable").disableSelection();
 });
 
-$(".todoList").on("dblclick", ".todoItem .item .fa-check-circle", (event) => {
+$(".todoList").on("click", ".todoItem .item .fa-check-circle", (event) => {
   $(event.target).parents("li").toggleClass("checked");
   //$(event.target).attr("fill", "#00c9ff");
 });

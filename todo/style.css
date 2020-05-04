@@ -88,6 +88,7 @@ h1, h2 {
   text-shadow: -5px 3px 5px #444444;
   display: flex;
   margin-bottom: 5px;
+  position: relative;
 }
 
 .listInput {
@@ -116,10 +117,16 @@ h1, h2 {
   transition-duration: 100ms;
 }
 
-.checked, .checked:hover {
+.checked {
   font-weight: bold;
   font-style: italic;
   text-decoration: line-through;
+  text-decoration-color: green;
+  text-shadow: 0 0 2px limegreen;
+}
+
+.checked .itemText {
+  color: #999999;
 }
 
 .itemText {
@@ -138,18 +145,97 @@ h1, h2 {
   justify-content: center;
 }
 
-.fa-check-circle, .fa-trash-alt {
+.fa-check-circle, .fa-trash-alt, .fa-question-circle {
   width: 21px;
   height: 21px;
   display: inline-block;
-  fill: rgb(0, 198, 255);
   margin-right: 5px;
 }
 
 .fa-check-circle {
+  fill: limegreen;
   margin-right: 10px;
 }
 
-.fa-check-circle:hover, .fa-trash-alt:hover {
-  fill: rgb(200, 198, 255);
+.fa-check-circle:hover {
+  fill: greenyellow
+}
+
+.fa-trash-alt {
+  fill: goldenrod;
+}
+
+.fa-trash-alt:hover {
+  fill: orange;
+}
+
+.fa-question-circle {
+  fill: #00c6ff;
+  margin-bottom: 5px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  cursor: pointer;
+}
+
+.fa-question-circle:hover {
+  fill: #0072ff;
+}
+
+/* Tooltip container */
+.tooltip {
+  /*position: relative;*/
+  display: inline-block;
+  /*border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 350px;
+  background-color: black;
+  color: #fff;
+  font-size: 15px;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+ 
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+.tooltip .tooltiptext {
+  top: 15px;
+  left: 105%;
+}
+
+.tooltip .tooltiptext::after {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  right: 100%; /* To the left of the tooltip */
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent black transparent transparent;
+}
+
+.tooltip .tooltiptext {
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.tooltip:hover .tooltiptext {
+  opacity: 0.8;
+}
+
+hr {
+  width: 80%;
+  margin: auto;
 }

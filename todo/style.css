@@ -13,6 +13,7 @@ html {
 
 body {
   background: linear-gradient(170deg, #00c9ff, #92fe9d);
+  background-attachment: fixed;
   /*background: linear-gradient(170deg, #0072ff, #00c6ff);*/
 }
 
@@ -74,6 +75,7 @@ h1 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 150px;
   box-shadow: -40px 25px 40px rgba(0,0,0,0.3);
 }
 
@@ -100,7 +102,7 @@ h1 {
 .todoItem:hover {
   transform: scale(1.2);
   transition-timing-function: cubic-bezier(0.42, 0, 1, 1);
-  transition-duration: .1s;
+  transition-duration: 100ms;
 }
 
 .checked, .checked:hover {

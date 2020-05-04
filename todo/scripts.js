@@ -20,3 +20,4 @@ $("#todoList").on("click", "li", (event) => {
 });
 
 addTodo("Buy milk");
+console.log("betöltve");

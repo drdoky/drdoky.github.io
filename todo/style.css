@@ -130,12 +130,14 @@ h1, h2 {
 }
 
 .itemText {
+  font-weight: bold;
   display: inline-block;
   height: 100%;
   line-height: 35px;
   padding: 0 10px 0;
   margin-right: auto;
   color: #cccccc;
+  text-shadow: 0 0 1px white;
 }
 
 .item {

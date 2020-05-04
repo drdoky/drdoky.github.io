@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="style.css">
   <title>Todo List</title>
 </head>
@@ -19,11 +20,12 @@
         <input type="text" id="inTodo" placeholder="Add ToDo">
         <button id="btnTodo">Add todo</button>
       </div>
-      <ul class="todoList">
+      <ul id="sortable" class="todoList">
       </ul>
     </div>
-    </div>
+  </div>
   <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script type="text/javascript" src="scripts.js"></script>
 </body>
 </html>

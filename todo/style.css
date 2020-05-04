@@ -49,7 +49,7 @@ body {
   will-change: background-position;
 }
 
-h1 {
+h1, h2 {
   margin: auto;
 }
 
@@ -77,6 +77,17 @@ h1 {
   align-items: center;
   margin-bottom: 150px;
   box-shadow: -40px 25px 40px rgba(0,0,0,0.3);
+}
+
+.listHeader {
+  width: 100%;
+  height: 60px;
+  background-image: radial-gradient(circle at 29% 25%, hsla(280,0%,87%,0.1) 0%, hsla(280,0%,87%,0.1) 54%,transparent 54%, transparent 89%,transparent 89%, transparent 100%),radial-gradient(circle at 35% 35%, hsla(280,0%,87%,0.1) 0%, hsla(280,0%,87%,0.1) 2%,transparent 2%, transparent 48%,transparent 48%, transparent 100%),radial-gradient(circle at 47% 56%, hsla(280,0%,87%,0.1) 0%, hsla(280,0%,87%,0.1) 43%,transparent 43%, transparent 76%,transparent 76%, transparent 100%),radial-gradient(circle at 48% 84%, hsla(280,0%,87%,0.1) 0%, hsla(280,0%,87%,0.1) 64%,transparent 64%, transparent 84%,transparent 84%, transparent 100%),radial-gradient(circle at 31% 76%, hsla(280,0%,87%,0.1) 0%, hsla(280,0%,87%,0.1) 45%,transparent 45%, transparent 86%,transparent 86%, transparent 100%),linear-gradient(135deg, rgb(2, 39, 217),rgb(100, 100, 207));
+  font-size: 2em;
+  color: #cccccc;
+  text-shadow: -5px 3px 5px #444444;
+  display: flex;
+  margin-bottom: 5px;
 }
 
 .listInput {

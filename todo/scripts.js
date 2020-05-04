@@ -19,5 +19,10 @@ $("#todoList").on("click", "li", (event) => {
   $(event.target).toggleClass("checked");
 });
 
+$(function() {
+  $("#sortable").sortable();
+  $("#sortable").disableSelection();
+});
+
 addTodo("Buy milk");
 console.log("betöltve");

@@ -13,7 +13,7 @@ function addTodo (strtodo) {
   }
 }
 
-$("#btnTodo").on('click', addTodo;
+$("#btnTodo").on('click', addTodo);
 
 $("#todoList").on("click", "li", (event) => {
   $(event.target).toggleClass("checked");

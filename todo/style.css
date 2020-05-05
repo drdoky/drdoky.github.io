@@ -90,11 +90,56 @@ h1, h2 {
   display: flex;
   margin-bottom: 5px;
   position: relative;
-  border-radius: 10px 8px 0 0;
+  border-radius: 8px 8px 0 8px;
 }
 
 .listInput {
   width: 100%;
+}
+
+.inContainer {
+  background-image: radial-gradient(circle at 29% 25%, hsla(280,0%,87%,0.1) 0%, hsla(280,0%,87%,0.1) 54%,transparent 54%, transparent 89%,transparent 89%, transparent 100%),radial-gradient(circle at 35% 35%, hsla(280,0%,87%,0.1) 0%, hsla(280,0%,87%,0.1) 2%,transparent 2%, transparent 48%,transparent 48%, transparent 100%),radial-gradient(circle at 47% 56%, hsla(280,0%,87%,0.1) 0%, hsla(280,0%,87%,0.1) 43%,transparent 43%, transparent 76%,transparent 76%, transparent 100%),radial-gradient(circle at 48% 84%, hsla(280,0%,87%,0.1) 0%, hsla(280,0%,87%,0.1) 64%,transparent 64%, transparent 84%,transparent 84%, transparent 100%),radial-gradient(circle at 31% 76%, hsla(280,0%,87%,0.1) 0%, hsla(280,0%,87%,0.1) 45%,transparent 45%, transparent 86%,transparent 86%, transparent 100%),linear-gradient(135deg, rgb(2, 39, 217),rgb(100, 100, 207));
+  border-radius: 6px;
+}
+
+#inTodo {
+  border: 1px solid white;
+  background: rgba(255, 255, 255, 0.5);;
+  border-radius: 6px;
+  padding-left: 10px;
+  color: #666666;
+  font-size: 1.2em;
+  font-style: italic;
+}
+
+#btnTodo {
+  margin-top: 2px;
+  border: none;
+  border-radius: 6px;
+  border-top: 1px solid #96d1f8;
+  background: #65a9d7;
+  background: linear-gradient(#3e779d, #65a9d7);
+  padding: 5px 10px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+  -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+  box-shadow: rgba(0,0,0,1) 0 1px 0;
+  text-shadow: rgba(0,0,0,.4) 0 1px 0;
+  color: white;
+  text-decoration: none;
+  vertical-align: middle;
+}
+
+#btnTodo:hover {
+  border-top-color: #28597a;
+  background: #28597a;
+  color: #ccc;
+}
+
+#btnTodo:active {
+  border-top-color: #1b435e;
+  background: #1b435e;
 }
 
 #inTodo, .todoItem, #btnTodo {

@@ -74,7 +74,7 @@ body {
   position: relative;
 }
 
-.thumbs, .prevImgCont, .nextImgCont, .actImgCont, .innerContainer {
+.thumbs, .prevImgCont, .nextImgCont, .actImgCont, .innerContainer, .flexible {
   /*outline: 1px solid red;*/
   display: flex;
   text-align: center;
@@ -130,8 +130,8 @@ body {
 }
 
 .actImg {
-  width: 100%;
-  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
   position: absolute;
   transition: opacity 1000ms ease;
@@ -143,4 +143,12 @@ body {
 
 .inaktiv {
   opacity: 0;
+}
+
+.imgInfo {
+  height: 20%;
+  background: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  bottom: 0;
+  transition: width 700ms ease;
 }

@@ -3,3 +3,5 @@ $(".green").on("click", () => {
   console.log($(".aktiv").width());
   $(".imgInfo").width($(".aktiv").width());
 });
+
+$(".imgInfo").width($(".aktiv").width());  // ideiglenes szélességállítás

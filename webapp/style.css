@@ -56,16 +56,16 @@ body {
   text-align: center;
 }
 
-.prevImg, .nextImg, .actImg {
+.prevImgCont, .nextImgCont, .actImgCont {
   height: 100%;
 }
 
-.prevImg, .nextImg {
-  width: 10%;
+.prevImgCont, .nextImgCont {
+  width: 80px;
 }
 
-.actImg {
-  width: 80%;
+.actImgCont {
+  width: calc(100% - 160px);
 }
 
 .innerContainer {
@@ -73,7 +73,7 @@ body {
   height: calc(100% - 20px);
 }
 
-.thumbs, .prevImg, .nextImg, .actImg, .innerContainer {
+.thumbs, .prevImgCont, .nextImgCont, .actImgCont, .innerContainer {
   /*outline: 1px solid red;*/
   display: flex;
   text-align: center;
@@ -81,44 +81,49 @@ body {
   justify-content: center;
 }
 
-.metallic.linear {
+.green {
   width: 80%;
   font-size: 4em;
   height: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 10px;
-  background-image: -webkit-repeating-linear-gradient(left, hsla(0,0%,100%,0) 0%, hsla(0,0%,100%,0)   6%, hsla(0,0%,100%, .1) 7.5%),
-    -webkit-repeating-linear-gradient(left, hsla(0,0%,  0%,0) 0%, hsla(0,0%,  0%,0)   4%, hsla(0,0%,  0%,.03) 4.5%),
-    -webkit-repeating-linear-gradient(left, hsla(0,0%,100%,0) 0%, hsla(0,0%,100%,0) 1.2%, hsla(0,0%,100%,.15) 2.2%),
-    
-    linear-gradient(180deg, hsl(0,0%,78%)  0%, 
-    hsl(0,0%,90%) 47%, 
-    hsl(0,0%,78%) 53%,
-    hsl(0,0%,70%)100%);
+  background: linear-gradient(yellowgreen, green, yellowgreen);
+  box-shadow:
+  inset 0 0 5px 4px yellowgreen,
+  -8px 12px 10px rgba(0, 0, 0, 0.7);
 }
 
-
-/* Oval ------------------------- */
-
-.metal.linear.oval {
-  margin-top: 100px;
-  width: 70px;
-  height: 60px;
-  line-height: 60px !important;
-  border-radius: 50%;
-  font: italic bold 3em/50px Georgia, "Times New Roman", Times, serif;
+.green:hover {
+  background: linear-gradient(green, yellowgreen, green);
+  box-shadow:
+  inset 0 0 5px 4px green,
+  -8px 12px 10px rgba(0, 0, 0, 0.7);
 }
 
+.green:hover .prevImgSvg, .green:hover .nextImgSvg {
+  fill: green;
+}
 
+.green:active {
+  background: linear-gradient(#92fe9d, #00c9ff, #92fe9d);
+  box-shadow:
+  inset 0 0 5px 4px #92fe9d,
+  -8px 12px 10px rgba(0, 0, 0, 0.7);
+}
 
+.green:active .prevImgSvg, .green:active .nextImgSvg {
+  fill: lightgreen;
+}
 
-/* active ------------------------- */
+.prevImgSvg, .nextImgSvg {
+  width: 80%;
+  height: 80%;
+  display: inline-block;
+  fill: darkgreen;
+}
 
-.metallic:hover {
-  color: hsl(210, 100%, 40%);
-  text-shadow: hsla(210,100%,20%,.3) 0 -1px 0, hsl(210,100%,85%) 0 2px 1px, hsla(200,100%,80%,1) 0 0 5px, hsla(210,100%,50%,.6) 0 0 20px;
-  box-shadow: 
-    inset hsla(210,100%,30%,  1) 0  0px 0px 4px, /* border */
-    inset hsla(210,100%,15%, .4) 0 -1px 5px 4px, /* soft SD */
-    inset hsla(210,100%,20%,.25) 0 -1px 0px 7px, /* bottom SD */
-    inset hsla(210,100%,100%,.7) 0  2px 1px 7px, /* top HL */
-  }
+.prevImgSvg {
+  transform: rotate(0.5turn);
+}

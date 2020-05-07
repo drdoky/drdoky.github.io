@@ -137,25 +137,28 @@ body {
   max-height: 100%;
   object-fit: contain;
   position: absolute;
-  transition: opacity 1000ms ease;
+  transition: all 1000ms ease;
 }
 
 .aktiv {
   opacity: 1;
+  z-index: 998;
 }
 
 .inaktiv {
   opacity: 0;
+  z-index: 997;
 }
 
 .imgInfo {
   height: 20%;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.8);
   text-align: left;
   position: absolute;
   bottom: 0;
   transition: width 700ms ease;
   overflow: hidden;
+  z-index: 999;
 }
 
 .imgTitle {
@@ -193,8 +196,19 @@ body {
 
 .forras {
   right: 0;
-  bottom: 2em;
+  bottom: 0;
 }
+
+.link {
+  text-decoration: none;
+}
+
+.link:hover {
+  text-shadow:
+    0 0 2px yellowgreen,
+    0 0 4px green;
+}
+
 /*
 font-family: 'Abril Fatface', cursive;
 font-family: 'Josefin Sans', sans-serif;

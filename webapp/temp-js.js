@@ -36,7 +36,7 @@ var appData = {
     this.setPrevImgIdx(Idx);
     this.setNextImgIdx(Idx);
     // adatok betöltése az UI-ba:
-    this.sendImgDataToUI(Idx);
+    this.sendImgDataToUI();
   },
   setPrevImgIdx: function(Idx) {
     Idx--;
@@ -67,56 +67,56 @@ var appData = {
       licence: ilicence
     });
     $(".imgContainer").append(`<img id="img${this.getLastIdx()}" src="${this.getLastFileName()}" alt="" class="actImg inaktiv">`);
+    //<img src="" alt="" class="actImg aktiv">
   },
   getLastFileName: function() {
     // a legutolsó kép fájlnevét adja vissza elérési úttal
     return this.getImgLocation() + this.imgData[this.imgData.length - 1].fileName;
   },
-  getImgFileName: function(Idx) {
-    // az Idx indexű kép fájlnevét adja vissza elérési úttal
-    return this.getImgLocation() + this.imgData[Idx].fileName;
+  getActFileName: function() {
+    // aktuális kép fájlnevét adja vissza elérési úttal
+    return this.getImgLocation() + this.imgData[this.actImgIdx].fileName;
   },
   getLastThumbFName: function() {
     // a legutolsó kép thumbnail fájlnevét adja vissza elérési úttal
     return this.getImgLocation() + this.getThumbPrefix() + this.imgData[this.imgData.length() - 1].fileName;
   },
-  getImgThumbFName: function(Idx) {
-    // az Idx indexű kép thumbnail fájlnevét adja vissza elérési úttal
-    return this.getImgLocation() + this.getThumbPrefix() + this.imgData[Idx].fileName;
+  getActThumbFName: function() {
+    // aktuális kép thumbnail fájlnevét adja vissza elérési úttal
+    return this.getImgLocation() + this.getThumbPrefix() + this.imgData[this.actImgIdx].fileName;
   },
-  getImgTitle: function(Idx) {
-    // az Idx indexű kép címét adja vissza
-    return this.imgData[Idx].title;
+  getActTitle: function() {
+    // aktuális kép fájlnevét adja vissza
+    return this.imgData[this.actImgIdx].title + " - " + this.actImgIdx;
   },
-  getImgDescription: function(Idx) {
-    // az Idx indexű kép leírását adja vissza
-    return this.imgData[Idx].description;
+  getActDescription: function() {
+    // aktuális kép fájlnevét adja vissza
+    return this.imgData[this.actImgIdx].description;
   },
-  getImgOriginalName: function(Idx) {
-    // az Idx indexű kép eredeti fájlnevét adja vissza
-    return `Original filename: ${this.imgData[Idx].originalName}`;
+  getActOriginalName: function() {
+    // aktuális kép fájlnevét adja vissza
+    return `Original filename: ${this.imgData[this.actImgIdx].originalName}`;
   },
-  getImgSource: function(Idx) {
-    // az Idx indexű kép forrását adja vissza
-    return `Source: ${this.imgData[Idx].forras}`;
+  getActSource: function() {
+    // aktuális kép fájlnevét adja vissza
+    return `Source: ${this.imgData[this.actImgIdx].forras}`;
   },
-  getImgLicense: function(Idx) {
-    // az Idx indexű kép licencét adja vissza
-    return `Licence: ${this.imgData[Idx].licence}`;
+  getActLicense: function() {
+    // aktuális kép fájlnevét adja vissza
+    return `Licence: ${this.imgData[this.actImgIdx].licence}`;
   },
-  sendImgDataToUI: function(Idx) {
+  sendImgDataToUI: function() {
     // az aktuális képadatok betöltése a felhasználói felületbe...
     //$(".inaktiv").attr("src", appData.getActFileName() + "?" + (new Date()).getTime());
-    $(".imgTitle").text(appData.getImgTitle(Idx));
-    $(".imgDescription").text(appData.getImgDescription(Idx));
-    $(".licence").text(appData.getImgLicense(Idx));
-    $(".forras").text(appData.getImgSource(Idx));
-    // ...majd a feliratsáv átméretezése és képváltás:
-    $(".imgInfo").width($(`#img${Idx}`).width());
-    $(".imgInfo").css("bottom", $(`#img${Idx}`).css("bottom"));
-    //$(".imgInfo").bottom($(`#img${Idx}`).width());
-    $(".aktiv").toggleClass("aktiv inaktiv");
-    $(`#img${Idx}`).toggleClass("aktiv inaktiv");
+    $(".imgTitle").text(appData.getActTitle());
+    $(".imgDescription").text(appData.getActDescription());
+    $(".licence").text(appData.getActLicense());
+    $(".forras").text(appData.getActSource());
+
+    // ...majd képváltás és feliratsáv átméretezése
+    $(".imgInfo").width($(".aktiv").width());
+
+    //$(".actImg").toggleClass("inaktiv aktiv");
 
     //$(".imgInfo").width($(".aktiv").width());
   }

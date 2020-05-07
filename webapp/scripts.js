@@ -82,7 +82,9 @@ var appData = {
   },
   getImgThumbFName: function(Idx) {
     // az Idx indexű kép thumbnail fájlnevét adja vissza elérési úttal
-    return this.getImgLocation() + this.getThumbPrefix() + this.imgData[Idx].fileName;
+    let fname = this.getImgLocation() + this.getThumbPrefix() + this.imgData[Idx].fileName;
+    fname = fname.replace("jpg", "png");
+    return fname;
   },
   getImgTitle: function(Idx) {
     // az Idx indexű kép címét adja vissza
@@ -115,7 +117,6 @@ var appData = {
     $(".imgInfo").css("bottom", $(`#img${Idx}`).css("bottom"));
     $(".aktiv").toggleClass("aktiv inaktiv");
     $(`#img${Idx}`).toggleClass("aktiv inaktiv");
-    // teszt
   }
 };
 
@@ -157,3 +158,15 @@ $(".green").on("click", (event) => {
       break;
   }
 });
+
+
+/*
+$(".actImgCont").mousemove(function(event) {
+  let pageCoords = "( " + event.pageX + ", " + event.pageY + " )";
+  let clientCoords = "( " + event.clientX + ", " + event.clientY + " )";
+  
+  //console.log(`pX, pY: ${pageCoords} / cX, cX: ${clientCoords}`);
+  
+  $(".imgTitle").text(`pX, pY: ${pageCoords} / cX, cX: ${clientCoords} `);
+});
+*/

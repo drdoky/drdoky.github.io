@@ -115,6 +115,7 @@ var appData = {
     $(".imgInfo").css("bottom", $(`#img${Idx}`).css("bottom"));
     $(".aktiv").toggleClass("aktiv inaktiv");
     $(`#img${Idx}`).toggleClass("aktiv inaktiv");
+    // teszt
   }
 };
 

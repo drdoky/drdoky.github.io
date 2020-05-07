@@ -106,7 +106,6 @@ var appData = {
   },
   sendImgDataToUI: function(Idx) {
     // az aktuális képadatok betöltése a felhasználói felületbe...
-    //$(".inaktiv").attr("src", appData.getActFileName() + "?" + (new Date()).getTime());
     $(".imgTitle").text(appData.getImgTitle(Idx));
     $(".imgDescription").text(appData.getImgDescription(Idx));
     $(".licence").text(appData.getImgLicense(Idx));
@@ -114,11 +113,8 @@ var appData = {
     // ...majd a feliratsáv átméretezése és képváltás:
     $(".imgInfo").width($(`#img${Idx}`).width());
     $(".imgInfo").css("bottom", $(`#img${Idx}`).css("bottom"));
-    //$(".imgInfo").bottom($(`#img${Idx}`).width());
     $(".aktiv").toggleClass("aktiv inaktiv");
     $(`#img${Idx}`).toggleClass("aktiv inaktiv");
-
-    //$(".imgInfo").width($(".aktiv").width());
   }
 };
 

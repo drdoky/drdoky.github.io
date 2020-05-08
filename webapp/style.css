@@ -211,6 +211,21 @@ body {
     0 0 4px green;
 }
 
+.imgCard, .imgThumb {
+  width: calc(((100vh * 0.2) -40px) / 1.618);
+  height: 100%;
+}
+
+.imgCard {
+  /*position: absolute;*/
+  margin: 0 20px 0;
+  transition: all 350ms ease;
+}
+
+.imgThumb {
+  object-fit: cover;
+}
+
 /*
 font-family: 'Abril Fatface', cursive;
 font-family: 'Josefin Sans', sans-serif;

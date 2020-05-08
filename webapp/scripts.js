@@ -67,6 +67,7 @@ var appData = {
       licence: ilicence
     });
     $(".imgContainer").append(`<img id="img${this.getLastIdx()}" src="${this.getLastFileName()}" alt="" class="actImg inaktiv">`);
+    $(".thumbsContainer").append(`<figure class="imgCard"><img id="thumb${this.getLastIdx()}" src="${this.getLastThumbFName()}" alt="" class="imgThumb thumb-inaktiv"><figcaption>${this.getImgTitle(this.getLastIdx())}</figcaption></figure>`);
   },
   getLastFileName: function() {
     // a legutolsó kép fájlnevét adja vissza elérési úttal
@@ -78,7 +79,9 @@ var appData = {
   },
   getLastThumbFName: function() {
     // a legutolsó kép thumbnail fájlnevét adja vissza elérési úttal
-    return this.getImgLocation() + this.getThumbPrefix() + this.imgData[this.imgData.length() - 1].fileName;
+    let fname = this.getImgLocation() + this.getThumbPrefix() + this.imgData[this.imgData.length - 1].fileName;
+    fname = fname.replace("jpg", "png");
+    return fname;
   },
   getImgThumbFName: function(Idx) {
     // az Idx indexű kép thumbnail fájlnevét adja vissza elérési úttal
@@ -112,11 +115,15 @@ var appData = {
     $(".imgDescription").text(appData.getImgDescription(Idx));
     $(".licence").text(appData.getImgLicense(Idx));
     $(".forras").text(appData.getImgSource(Idx));
-    // ...majd a feliratsáv átméretezése és képváltás:
+    // ...majd a feliratsáv átméretezése és pozícionálása...
     $(".imgInfo").width($(`#img${Idx}`).width());
     $(".imgInfo").css("bottom", $(`#img${Idx}`).css("bottom"));
+    // ...majd képváltás...
     $(".aktiv").toggleClass("aktiv inaktiv");
     $(`#img${Idx}`).toggleClass("aktiv inaktiv");
+    // ...és thumbnail-váltás
+    $(".thumb-aktiv").toggleClass("thumb-aktiv thumb-inaktiv");
+    $(`#thumb${Idx}`).toggleClass("thumb-aktiv thumb-inaktiv");
   }
 };
 
@@ -146,6 +153,7 @@ appData.addImg("pic20.jpg", "Sea at sunset", "Royal blue sky and sea shore at su
 appData.addImg("pic21.jpg", "Forest waterfall", "Forest waterfall with small lake.", "time-lapse-photo-of-water-falls-in-the-forest-3715436.jpg", "https://www.pexels.com/", "Free");
 appData.addImg("pic22.jpg", "The Sign", "Woman making conventional hand sign.", "woman-making-hand-sign-998850.jpg", "https://www.pexels.com/", "Free");
 
+//
 appData.setActImgIdx(0);
 
 $(".green").on("click", (event) => {
@@ -158,7 +166,6 @@ $(".green").on("click", (event) => {
       break;
   }
 });
-
 
 /*
 $(".actImgCont").mousemove(function(event) {

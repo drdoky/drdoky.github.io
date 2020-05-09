@@ -162,7 +162,7 @@ body {
   position: absolute;
   /*top: calc(100% - 20%);*/
   /*bottom: 0;*/
-  transition: all 700ms ease-in-out;
+  transition: all 700ms ease;
   z-index: 999;
 }
 

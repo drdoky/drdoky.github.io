@@ -109,23 +109,40 @@ var appData = {
     // az Idx indexű kép licencét adja vissza
     return `Licence: ${this.imgData[Idx].licence}`;
   },
+  setImgInfoPos(Idx) {
+    $(".imgInfo").width($(`#img${Idx}`).width());
+    if ($(".hidden").exists()) {
+      $(".hidden").position({
+        my: "left top",
+        at: "left bottom",
+        of: ".aktiv"
+      });
+    } else {
+      $(".imgInfo").position({
+        my: "left bottom",
+        at: "left bottom",
+        of: `#img${Idx}`
+      });
+    };
+  },
   sendImgDataToUI: function(Idx) {
     // az aktuális képadatok betöltése a felhasználói felületbe...
     $(".imgTitle").text(appData.getImgTitle(Idx));
     $(".imgDescription").text(appData.getImgDescription(Idx));
     $(".licence").text(appData.getImgLicense(Idx));
     $(".forras").text(appData.getImgSource(Idx));
-    // ...majd a feliratsáv átméretezése és pozícionálása...
-    $(".imgInfo").width($(`#img${Idx}`).width());
-    $(".imgInfo").css("bottom", $(`#img${Idx}`).css("bottom"));
-    // ...majd képváltás...
+    // ...képváltás...
     $(".aktiv").toggleClass("aktiv inaktiv");
     $(`#img${Idx}`).toggleClass("aktiv inaktiv");
+    // ...majd a feliratsáv átméretezése és pozícionálása...
+    this.setImgInfoPos(Idx);
     // ...és thumbnail-váltás
     $(".thumb-aktiv").toggleClass("thumb-aktiv thumb-inaktiv");
     $(`#thumb${Idx}`).toggleClass("thumb-aktiv thumb-inaktiv");
   }
 };
+
+jQuery.fn.exists = function(){return this.length>0;}
 
 appData.setImgLocation("images/");
 appData.setThumbPrefix("thumb-");
@@ -167,7 +184,46 @@ $(".green").on("click", (event) => {
   }
 });
 
+$(".toggleInfo").click(() => {
+  //$(".imgTitle").text("ph: " + ($(".aktiv").css("height")) + " pt: " + $(".aktiv").css("top") + " össz.: " + ($(".aktiv").css("height") + $(".aktiv").css("top")));
+  console.log($(".aktiv").height());
+  //$( "p" ).last().offset({ top: 10, left: 30 });
+  console.log($(".aktiv").offset().top);
+  //$(".imgTitle").text($(".aktiv").height() + $(".aktiv").top());
+  //let tmp = parseint($(".aktiv").css("height")) + parseint($(".aktiv").css("top")) + parseint($(".imgInfo").css("height"));
+  //ChangeHiddenBottom(tmp);
+  //$(".imgTitle").text(tmp);
+  //$(".hidden").css("bottom", tmp);
+  $(".imgInfo").toggleClass("hidden");
+  if ($(".hidden").exists()) {
+    $(".hidden").position({
+      my: "left top",
+      at: "left bottom",
+      of: ".aktiv"
+    });
+  } else {
+    $(".imgInfo").position({
+      my: "left bottom",
+      at: "left bottom",
+      of: `#img${appData.actImgIdx}`
+    });
+  };
+});
+
+
 /*
+//félretett részek:
+
+function ChangeHiddenBottom (fval) {
+  var ss = document.styleSheets[2];
+  var rules = ss.cssRules || ss.rules;
+  for (var i = 0; i < rules.length; i++) {
+    if (/(^|,) *\.hidden *(,|$)/.test(rules[i].selectorText)) {
+      rules[i].style.top = fval;
+      break;
+    }
+  }}
+
 $(".actImgCont").mousemove(function(event) {
   let pageCoords = "( " + event.pageX + ", " + event.pageY + " )";
   let clientCoords = "( " + event.clientX + ", " + event.clientY + " )";

@@ -18,25 +18,17 @@ var appData = {
     return this.thumbPrefix;
   },
   nextImg: function() {
-    let Idx = this.actImgIdx + 1;
-    if (Idx === (this.imgData.length)) {
-      Idx = 0;
-    }
-    this.setActImgIdx(Idx);
+    this.setActImgIdx(this.nextImgIdx);
   },
   prevImg: function() {
-    let Idx = this.actImgIdx - 1;
-    if (Idx < 0) {
-      Idx = this.imgData.length - 1;
-    }
-    this.setActImgIdx(Idx);
+    this.setActImgIdx(this.prevImgIdx);
   },
   setActImgIdx: function(Idx) {
     this.actImgIdx = Idx;
     this.setPrevImgIdx(Idx);
     this.setNextImgIdx(Idx);
     // adatok betöltése az UI-ba:
-    this.sendImgDataToUI();
+    this.sendImgDataToUI(Idx);
   },
   setPrevImgIdx: function(Idx) {
     Idx--;
@@ -67,60 +59,84 @@ var appData = {
       licence: ilicence
     });
     $(".imgContainer").append(`<img id="img${this.getLastIdx()}" src="${this.getLastFileName()}" alt="" class="actImg inaktiv">`);
-    //<img src="" alt="" class="actImg aktiv">
+    $(".thumbsContainer").append(`<figure class="imgCard"><img id="thumb${this.getLastIdx()}" src="${this.getLastThumbFName()}" alt="" class="imgThumb thumb-inaktiv"><figcaption>${this.getImgTitle(this.getLastIdx())}</figcaption></figure>`);
   },
   getLastFileName: function() {
     // a legutolsó kép fájlnevét adja vissza elérési úttal
     return this.getImgLocation() + this.imgData[this.imgData.length - 1].fileName;
   },
-  getActFileName: function() {
-    // aktuális kép fájlnevét adja vissza elérési úttal
-    return this.getImgLocation() + this.imgData[this.actImgIdx].fileName;
+  getImgFileName: function(Idx) {
+    // az Idx indexű kép fájlnevét adja vissza elérési úttal
+    return this.getImgLocation() + this.imgData[Idx].fileName;
   },
   getLastThumbFName: function() {
     // a legutolsó kép thumbnail fájlnevét adja vissza elérési úttal
-    return this.getImgLocation() + this.getThumbPrefix() + this.imgData[this.imgData.length() - 1].fileName;
+    let fname = this.getImgLocation() + this.getThumbPrefix() + this.imgData[this.imgData.length - 1].fileName;
+    fname = fname.replace("jpg", "png");
+    return fname;
   },
-  getActThumbFName: function() {
-    // aktuális kép thumbnail fájlnevét adja vissza elérési úttal
-    return this.getImgLocation() + this.getThumbPrefix() + this.imgData[this.actImgIdx].fileName;
+  getImgThumbFName: function(Idx) {
+    // az Idx indexű kép thumbnail fájlnevét adja vissza elérési úttal
+    let fname = this.getImgLocation() + this.getThumbPrefix() + this.imgData[Idx].fileName;
+    fname = fname.replace("jpg", "png");
+    return fname;
   },
-  getActTitle: function() {
-    // aktuális kép fájlnevét adja vissza
-    return this.imgData[this.actImgIdx].title + " - " + this.actImgIdx;
+  getImgTitle: function(Idx) {
+    // az Idx indexű kép címét adja vissza
+    return this.imgData[Idx].title;
   },
-  getActDescription: function() {
-    // aktuális kép fájlnevét adja vissza
-    return this.imgData[this.actImgIdx].description;
+  getImgDescription: function(Idx) {
+    // az Idx indexű kép leírását adja vissza
+    return this.imgData[Idx].description;
   },
-  getActOriginalName: function() {
-    // aktuális kép fájlnevét adja vissza
-    return `Original filename: ${this.imgData[this.actImgIdx].originalName}`;
+  getImgOriginalName: function(Idx) {
+    // az Idx indexű kép eredeti fájlnevét adja vissza
+    return `Original filename: ${this.imgData[Idx].originalName}`;
   },
-  getActSource: function() {
-    // aktuális kép fájlnevét adja vissza
-    return `Source: ${this.imgData[this.actImgIdx].forras}`;
+  getImgSource: function(Idx) {
+    // az Idx indexű kép forrását adja vissza
+    return `Source: ${this.imgData[Idx].forras}`;
   },
-  getActLicense: function() {
-    // aktuális kép fájlnevét adja vissza
-    return `Licence: ${this.imgData[this.actImgIdx].licence}`;
+  getImgLicense: function(Idx) {
+    // az Idx indexű kép licencét adja vissza
+    return `Licence: ${this.imgData[Idx].licence}`;
   },
-  sendImgDataToUI: function() {
+  setImgInfoPos(Idx) {
+    $(".imgInfo").width($(`#img${Idx}`).width());
+    if ($(".hidden").exists()) {
+      $(".hidden").position({
+        my: "left top",
+        at: "left bottom",
+        of: ".aktiv"
+      });
+    } else {
+      $(".imgInfo").position({
+        my: "left bottom",
+        at: "left bottom",
+        of: `#img${Idx}`
+      });
+    };
+  },
+  sendImgDataToUI: function(Idx) {
     // az aktuális képadatok betöltése a felhasználói felületbe...
-    //$(".inaktiv").attr("src", appData.getActFileName() + "?" + (new Date()).getTime());
-    $(".imgTitle").text(appData.getActTitle());
-    $(".imgDescription").text(appData.getActDescription());
-    $(".licence").text(appData.getActLicense());
-    $(".forras").text(appData.getActSource());
-
-    // ...majd képváltás és feliratsáv átméretezése
-    $(".imgInfo").width($(".aktiv").width());
-
-    //$(".actImg").toggleClass("inaktiv aktiv");
-
-    //$(".imgInfo").width($(".aktiv").width());
+    $(".imgTitle").text(appData.getImgTitle(Idx));
+    $(".imgDescription").text(appData.getImgDescription(Idx));
+    $(".licence").text(appData.getImgLicense(Idx));
+    $(".forras").text(appData.getImgSource(Idx));
+    // ...képváltás...
+    $(".aktiv").toggleClass("aktiv inaktiv");
+    $(`#img${Idx}`).toggleClass("aktiv inaktiv");
+    // ...majd a feliratsáv átméretezése és pozícionálása...
+    this.setImgInfoPos(Idx);
+    // ...és thumbnail-váltás
+    $(".thumb-aktiv").toggleClass("thumb-aktiv thumb-inaktiv");
+    $(`#thumb${Idx}`).toggleClass("thumb-aktiv thumb-inaktiv");
   }
 };
+
+jQuery.fn.exists = function() {
+  return this.length > 0;
+}
 
 appData.setImgLocation("images/");
 appData.setThumbPrefix("thumb-");
@@ -148,7 +164,9 @@ appData.addImg("pic20.jpg", "Sea at sunset", "Royal blue sky and sea shore at su
 appData.addImg("pic21.jpg", "Forest waterfall", "Forest waterfall with small lake.", "time-lapse-photo-of-water-falls-in-the-forest-3715436.jpg", "https://www.pexels.com/", "Free");
 appData.addImg("pic22.jpg", "The Sign", "Woman making conventional hand sign.", "woman-making-hand-sign-998850.jpg", "https://www.pexels.com/", "Free");
 
-appData.setActImgIdx(0);
+$(window).one("load", function() {
+  appData.setActImgIdx(0)
+});
 
 $(".green").on("click", (event) => {
   switch ($(event.target).parents(".green").attr("id")) {
@@ -160,3 +178,60 @@ $(".green").on("click", (event) => {
       break;
   }
 });
+
+$(".toggleInfo").click(() => {
+  $(".imgInfo").toggleClass("hidden");
+  if ($(".hidden").exists()) {
+    $(".hidden").position({
+      my: "left top",
+      at: "left bottom",
+      of: ".aktiv"
+    });
+  } else {
+    $(".imgInfo").position({
+      my: "left bottom",
+      at: "left bottom",
+      of: `#img${appData.actImgIdx}`
+    });
+  };
+});
+
+
+/*
+//hibakereső eseménykezelők:
+
+$(document).ready(function() {
+  console.log("document loaded");
+});
+
+$(window).on("load", function() {
+  console.log("window loaded");
+});
+
+$("img").on("load", function(event) {
+  console.log($(event.target).attr("id") + "img loaded");
+});
+*/
+
+/*
+//félretett részek:
+
+function ChangeHiddenBottom (fval) {
+  var ss = document.styleSheets[2];
+  var rules = ss.cssRules || ss.rules;
+  for (var i = 0; i < rules.length; i++) {
+    if (/(^|,) *\.hidden *(,|$)/.test(rules[i].selectorText)) {
+      rules[i].style.top = fval;
+      break;
+    }
+  }}
+
+$(".actImgCont").mousemove(function(event) {
+  let pageCoords = "( " + event.pageX + ", " + event.pageY + " )";
+  let clientCoords = "( " + event.clientX + ", " + event.clientY + " )";
+  
+  //console.log(`pX, pY: ${pageCoords} / cX, cX: ${clientCoords}`);
+  
+  $(".imgTitle").text(`pX, pY: ${pageCoords} / cX, cX: ${clientCoords} `);
+});
+*/

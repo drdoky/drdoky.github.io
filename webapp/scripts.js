@@ -18,18 +18,10 @@ var appData = {
     return this.thumbPrefix;
   },
   nextImg: function() {
-    let Idx = this.actImgIdx + 1;
-    if (Idx === (this.imgData.length)) {
-      Idx = 0;
-    }
-    this.setActImgIdx(Idx);
+    this.setActImgIdx(this.nextImgIdx);
   },
   prevImg: function() {
-    let Idx = this.actImgIdx - 1;
-    if (Idx < 0) {
-      Idx = this.imgData.length - 1;
-    }
-    this.setActImgIdx(Idx);
+    this.setActImgIdx(this.prevImgIdx);
   },
   setActImgIdx: function(Idx) {
     this.actImgIdx = Idx;
@@ -142,7 +134,9 @@ var appData = {
   }
 };
 
-jQuery.fn.exists = function(){return this.length>0;}
+jQuery.fn.exists = function() {
+  return this.length > 0;
+}
 
 appData.setImgLocation("images/");
 appData.setThumbPrefix("thumb-");
@@ -170,8 +164,9 @@ appData.addImg("pic20.jpg", "Sea at sunset", "Royal blue sky and sea shore at su
 appData.addImg("pic21.jpg", "Forest waterfall", "Forest waterfall with small lake.", "time-lapse-photo-of-water-falls-in-the-forest-3715436.jpg", "https://www.pexels.com/", "Free");
 appData.addImg("pic22.jpg", "The Sign", "Woman making conventional hand sign.", "woman-making-hand-sign-998850.jpg", "https://www.pexels.com/", "Free");
 
-//
-appData.setActImgIdx(0);
+$(window).one("load", function() {
+  appData.setActImgIdx(0)
+});
 
 $(".green").on("click", (event) => {
   switch ($(event.target).parents(".green").attr("id")) {
@@ -185,15 +180,6 @@ $(".green").on("click", (event) => {
 });
 
 $(".toggleInfo").click(() => {
-  //$(".imgTitle").text("ph: " + ($(".aktiv").css("height")) + " pt: " + $(".aktiv").css("top") + " össz.: " + ($(".aktiv").css("height") + $(".aktiv").css("top")));
-  console.log($(".aktiv").height());
-  //$( "p" ).last().offset({ top: 10, left: 30 });
-  console.log($(".aktiv").offset().top);
-  //$(".imgTitle").text($(".aktiv").height() + $(".aktiv").top());
-  //let tmp = parseint($(".aktiv").css("height")) + parseint($(".aktiv").css("top")) + parseint($(".imgInfo").css("height"));
-  //ChangeHiddenBottom(tmp);
-  //$(".imgTitle").text(tmp);
-  //$(".hidden").css("bottom", tmp);
   $(".imgInfo").toggleClass("hidden");
   if ($(".hidden").exists()) {
     $(".hidden").position({
@@ -210,6 +196,22 @@ $(".toggleInfo").click(() => {
   };
 });
 
+
+/*
+//hibakereső eseménykezelők:
+
+$(document).ready(function() {
+  console.log("document loaded");
+});
+
+$(window).on("load", function() {
+  console.log("window loaded");
+});
+
+$("img").on("load", function(event) {
+  console.log($(event.target).attr("id") + "img loaded");
+});
+*/
 
 /*
 //félretett részek:

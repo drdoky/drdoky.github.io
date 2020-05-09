@@ -101,8 +101,8 @@ var appData = {
     // az Idx indexű kép licencét adja vissza
     return `Licence: ${this.imgData[Idx].licence}`;
   },
-  setImgInfoPos(Idx) {
-    $(".imgInfo").width($(`#img${Idx}`).width());
+  setImgInfoPos() {
+    $(".imgInfo").width($(".aktiv").width());
     if ($(".hidden").exists()) {
       $(".hidden").position({
         my: "left top",
@@ -113,7 +113,7 @@ var appData = {
       $(".imgInfo").position({
         my: "left bottom",
         at: "left bottom",
-        of: `#img${Idx}`
+        of: ".aktiv"
       });
     };
   },
@@ -124,10 +124,9 @@ var appData = {
     $(".licence").text(appData.getImgLicense(Idx));
     $(".forras").text(appData.getImgSource(Idx));
     // ...képváltás...
-    $(".aktiv").toggleClass("aktiv inaktiv");
-    $(`#img${Idx}`).toggleClass("aktiv inaktiv");
+    $(`.aktiv, #img${Idx}`).toggleClass("aktiv inaktiv");
     // ...majd a feliratsáv átméretezése és pozícionálása...
-    this.setImgInfoPos(Idx);
+    this.setImgInfoPos();
     // ...és thumbnail-váltás
     $(".thumb-aktiv").toggleClass("thumb-aktiv thumb-inaktiv");
     $(`#thumb${Idx}`).toggleClass("thumb-aktiv thumb-inaktiv");
@@ -181,19 +180,7 @@ $(".green").on("click", (event) => {
 
 $(".toggleInfo").click(() => {
   $(".imgInfo").toggleClass("hidden");
-  if ($(".hidden").exists()) {
-    $(".hidden").position({
-      my: "left top",
-      at: "left bottom",
-      of: ".aktiv"
-    });
-  } else {
-    $(".imgInfo").position({
-      my: "left bottom",
-      at: "left bottom",
-      of: `#img${appData.actImgIdx}`
-    });
-  };
+  appData.setImgInfoPos();
 });
 
 

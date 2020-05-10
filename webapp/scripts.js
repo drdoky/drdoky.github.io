@@ -137,6 +137,8 @@ jQuery.fn.exists = function() {
   return this.length > 0;
 }
 
+$(".loaderPage").show();
+
 appData.setImgLocation("images/");
 appData.setThumbPrefix("thumb-");
 //appData.addImg("pic01.jpg", "", "", "", "https://www.pexels.com/", "Free");
@@ -164,7 +166,10 @@ appData.addImg("pic21.jpg", "Forest waterfall", "Forest waterfall with small lak
 appData.addImg("pic22.jpg", "The Sign", "Woman making conventional hand sign.", "woman-making-hand-sign-998850.jpg", "https://www.pexels.com/", "Free");
 
 $(window).one("load", function() {
+  // betöltő div eltüntetése
   appData.setActImgIdx(0)
+  $(".thumbsContainer").width(($(".imgCard").length * ($(".imgCard").width() + 10)));
+  $(".loaderPage").hide();
 });
 
 $(".green").on("click", (event) => {
@@ -178,19 +183,38 @@ $(".green").on("click", (event) => {
   }
 });
 
+$(".thumbsContainer").on("click", ".imgThumb", function(event) {
+  let Idx = $(event.target).attr("id");
+  Idx = Idx.replace("thumb", "");
+  appData.setActImgIdx(Idx);
+});
+
 $(".toggleInfo").click(() => {
   $(".imgInfo").toggleClass("hidden");
   appData.setImgInfoPos();
 });
 
-$(".thumbs").mousemove(function(event) {
-  let pageCoords = "( " + event.pageX + ", " + event.pageY + " )";
-  let clientCoords = "( " + event.clientX + ", " + event.clientY + " )";
-  
-  //console.log(`pX, pY: ${pageCoords} / cX, cX: ${clientCoords}`);
-  
-  $(".info").text(`pX, pY: ${pageCoords} / cX, cX: ${clientCoords} `);
+$(".thumbs").mousemove(function(event){
+  $thumbsCont = $(".thumbsContainer");
+  $thumbsOuter = $(".thumbsContainer").parent(".innerContainer");
+  var sliderWidth = $thumbsOuter.width() - 30;
+  var totalWidth = $thumbsCont.width();
+  if ($thumbsCont.width() > sliderWidth) {
+    var mouseCoords = (event.pageX - this.offsetLeft - 30);
+    var mousePercentX = mouseCoords / sliderWidth;
+    var destX = -(((totalWidth - sliderWidth) - sliderWidth) * mousePercentX);
+    var thePosNeg = mouseCoords - destX;
+    var thePosPoz = destX - mouseCoords;
+    if (mouseCoords > destX) {
+      $thumbsCont.css("left", -thePosNeg); //without easing
+    } else if (mouseCoords < destX) {
+      $thumbsCont.css("left", thePosPoz); //without easing
+    }
+  }
 });
+
+
+
 
 /*
 //hibakereső eseménykezelők:
@@ -221,12 +245,12 @@ function ChangeHiddenBottom (fval) {
     }
   }}
 
-$(".actImgCont").mousemove(function(event) {
+$(".thumbs").mousemove(function(event) {
   let pageCoords = "( " + event.pageX + ", " + event.pageY + " )";
   let clientCoords = "( " + event.clientX + ", " + event.clientY + " )";
   
   //console.log(`pX, pY: ${pageCoords} / cX, cX: ${clientCoords}`);
   
-  $(".imgTitle").text(`pX, pY: ${pageCoords} / cX, cX: ${clientCoords} `);
+  $(".info").text(`pX, pY: ${pageCoords} / cX, cX: ${clientCoords} `);
 });
 */

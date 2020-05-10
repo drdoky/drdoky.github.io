@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>jQuery thumbnail scroller</title>
+<style type="text/css">
+<!--
+html,body{height:100%;}
+body {margin:0; padding:0; background:#ddd;}a{ color:#FFCC00}
+#outer_container{position:fixed; bottom:0; margin:40px 0; height:170px; padding:0 5px;}
+#thumbScroller{position:relative; overflow:hidden;}
+#thumbScroller .container{position:relative; left:0;}
+#thumbScroller .content{float:left;}
+#thumbScroller .content div{margin:10px; height:100%; font-family:Verdana, Geneva, sans-serif; font-size:13px;}
+#thumbScroller img{border:none;}
+#thumbScroller a{border:5px solid #000; margin:5px; display:block;}
+#thumbScroller a:hover{border-color:#fff;}
+-->
+</style>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script type="text/javascript" src="jquery.easing.1.3.js"></script>
+</head>
+
+<body>
+<div id="outer_container">
+<div id="thumbScroller">
+	<div class="container">
+    	<div class="content">
+        	<div><a href="#"><img src="thumbs/thumb1.jpg" title="The path" alt="The path" class="thumb" /></a></div>
+        </div>
+        <div class="content">
+        	<div><a href="#"><img src="thumbs/thumb2.jpg" title="A flower" alt="A flower" class="thumb" /></a></div>
+        </div>
+        <div class="content">
+        	<div><a href="#"><img src="thumbs/thumb3.jpg" title="Dusk" alt="Dusk" class="thumb" /></a></div>
+        </div>
+        <div class="content">
+        	<div><a href="#"><img src="thumbs/thumb4.jpg" title="A waterfall" alt="A waterfall" class="thumb" /></a></div>
+        </div>
+        <div class="content">
+        	<div><a href="#"><img src="thumbs/thumb5.jpg" title="The canyon" alt="The canyon" class="thumb" /></a></div>
+        </div>
+        <div class="content">
+        	<div><a href="#"><img src="thumbs/thumb6.jpg" title="The road" alt="The road" class="thumb" /></a></div>
+        </div>
+        <div class="content">
+        	<div><a href="#"><img src="thumbs/thumb7.jpg" title="A forest" alt="A forest" class="thumb" /></a></div>
+        </div>
+        <div class="content">
+        	<div><a href="#"><img src="thumbs/thumb8.jpg" title="A house" alt="A house" class="thumb" /></a></div>
+        </div>
+        <div class="content">
+        	<div><a href="#"><img src="thumbs/thumb9.jpg" title="Paradise" alt="Paradise" class="thumb" /></a></div>
+        </div>
+        <div class="content">
+        	<div><a href="#"><img src="thumbs/thumb10.jpg" title="Trees" alt="Trees" class="thumb" /></a></div>
+        </div>
+        <div class="content">
+        	<div><a href="#"><img src="thumbs/thumb11.jpg" title="Plant leaves" alt="Plant leaves" class="thumb" /></a></div>
+        </div>
+	</div>
+</div>
+</div>More script and css style
+: <a href="http://www.htmldrive.net/" title="HTML DRIVE - Free DHMTL Scripts,Jquery plugins,Javascript,CSS,CSS3,Html5 Library">www.htmldrive.net </a>
+
+<script>
+	$outer_container=$("#outer_container");
+	$thumbScroller=$("#thumbScroller");
+	$thumbScroller_container=$("#thumbScroller .container");
+	$thumbScroller_content=$("#thumbScroller .content");
+	
+	$(window).load(function() {
+		sliderLeft=$thumbScroller_container.position().left;
+		padding=$outer_container.css("paddingRight").replace("px", "");
+		sliderWidth=$(window).width()-padding;
+		$thumbScroller.css("width",sliderWidth);
+		var totalContent=0;
+
+		$thumbScroller_content.each(function () {
+			var $this=$(this);
+			totalContent+=$this.innerWidth();
+			$thumbScroller_container.css("width",totalContent);
+		});
+
+		$thumbScroller.mousemove(function(e){
+			if($thumbScroller_container.width()>sliderWidth){
+				var mouseCoords=(e.pageX - this.offsetLeft);
+	  			var mousePercentX=mouseCoords/sliderWidth;
+	  			var destX=-(((totalContent-(sliderWidth))-sliderWidth)*(mousePercentX));
+	  			var thePosA=mouseCoords-destX;
+	  			var thePosB=destX-mouseCoords;
+	  			var animSpeed=600; //ease amount
+	  			var easeType="easeOutCirc";
+	  			if(mouseCoords>destX){
+		  			$thumbScroller_container.css("left",-thePosA); //without easing
+		  			//$thumbScroller_container.stop().animate({left: -thePosA}, animSpeed,easeType); //with easing
+	  			} else if(mouseCoords<destX){
+		  			$thumbScroller_container.css("left",thePosB); //without easing
+		  			//$thumbScroller_container.stop().animate({left: thePosB}, animSpeed,easeType); //with easing
+	  			} else {
+					$thumbScroller_container.stop();
+				}
+			}
+		});
+	});
+
+	$(window).resize(function() {
+		$thumbScroller_container.css("left",sliderLeft); //without easing
+		//$thumbScroller_container.stop().animate({left: sliderLeft}, 400,"easeOutCirc"); //with easing
+		var newWidth=$(window).width()-padding;
+		$thumbScroller.css("width",newWidth);
+		sliderWidth=newWidth;
+	});
+</script>
+</body>
+</html>

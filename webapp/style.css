@@ -92,6 +92,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
   border-radius: 10px;
   background: linear-gradient(yellowgreen, green, yellowgreen);
   box-shadow:
@@ -247,13 +248,21 @@ body {
 }
 
 .imgCard {
-  /*position: absolute;*/
-  margin: 0 20px 0;
+  cursor: pointer;
   transition: all 350ms ease;
+  position: absolute;
 }
 
 .imgThumb {
   object-fit: cover;
+}
+
+.info {
+  position: absolute;
+}
+
+.thumbsContainer {
+  position: relative;
 }
 
 /*

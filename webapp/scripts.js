@@ -183,6 +183,14 @@ $(".toggleInfo").click(() => {
   appData.setImgInfoPos();
 });
 
+$(".thumbs").mousemove(function(event) {
+  let pageCoords = "( " + event.pageX + ", " + event.pageY + " )";
+  let clientCoords = "( " + event.clientX + ", " + event.clientY + " )";
+  
+  //console.log(`pX, pY: ${pageCoords} / cX, cX: ${clientCoords}`);
+  
+  $(".info").text(`pX, pY: ${pageCoords} / cX, cX: ${clientCoords} `);
+});
 
 /*
 //hibakereső eseménykezelők:

@@ -59,7 +59,7 @@ var appData = {
       licence: ilicence
     });
     $(".imgContainer").append(`<img id="img${this.getLastIdx()}" src="${this.getLastFileName()}" alt="" class="actImg inaktiv">`);
-    $(".thumbsContainer").append(`<figure class="imgCard" data-number="${this.getLastIdx()}"><img id="thumb${this.getLastIdx()}" data-number="${this.getLastIdx()}" src="${this.getLastThumbFName()}" alt="" class="imgThumb thumb-inaktiv"><figcaption data-number="${this.getLastIdx()}">${this.getImgTitle(this.getLastIdx())}</figcaption></figure>`);
+    $(".thumbsContainer").append(`<figure class="imgCard thumb${this.getLastIdx()} thumb-inaktiv" data-number="${this.getLastIdx()}"><img id="thumb${this.getLastIdx()}" data-number="${this.getLastIdx()}" src="${this.getLastThumbFName()}" alt="" class="imgThumb"><figcaption data-number="${this.getLastIdx()}">${this.getImgTitle(this.getLastIdx())}</figcaption></figure>`);
   },
   getLastFileName: function() {
     // a legutolsó kép fájlnevét adja vissza elérési úttal
@@ -129,7 +129,7 @@ var appData = {
     this.setImgInfoPos();
     // ...és thumbnail-váltás
     $(".thumb-aktiv").toggleClass("thumb-aktiv thumb-inaktiv");
-    $(`#thumb${Idx}`).toggleClass("thumb-aktiv thumb-inaktiv");
+    $(`.thumb${Idx}`).toggleClass("thumb-aktiv thumb-inaktiv");
   }
 };
 
@@ -185,14 +185,12 @@ $(".green").on("click", (event) => {
 
 $(".thumbsContainer").on("click", ".imgCard", function(event) {
   let Idx = $(event.target).attr("data-number");
-  //Idx = Idx.replace("thumb", "");
   if (Idx === appData.actImgIdx) { return; }
   appData.setActImgIdx(Idx);
 });
 
 $(".thumbsContainer").on("click", "figcaption", function(event) {
   let Idx = $(event.target).attr("data-number");
-  //Idx = Idx.replace("thumb", "");
   if (Idx === appData.actImgIdx) { return; }
   appData.setActImgIdx(Idx);
 });
@@ -214,9 +212,9 @@ $(".thumbs").mousemove(function(event){
     var thePosNeg = mouseCoords - destX;
     var thePosPoz = destX - mouseCoords;
     if (mouseCoords > destX) {
-      $thumbsCont.css("left", -thePosNeg); //without easing
+      $thumbsCont.css("left", -thePosNeg);
     } else if (mouseCoords < destX) {
-      $thumbsCont.css("left", thePosPoz); //without easing
+      $thumbsCont.css("left", thePosPoz);
     }
   }
 });

@@ -59,7 +59,7 @@ var appData = {
       licence: ilicence
     });
     $(".imgContainer").append(`<img id="img${this.getLastIdx()}" src="${this.getLastFileName()}" alt="" class="actImg inaktiv">`);
-    $(".thumbsContainer").append(`<figure class="imgCard"><img id="thumb${this.getLastIdx()}" src="${this.getLastThumbFName()}" alt="" class="imgThumb thumb-inaktiv"><figcaption>${this.getImgTitle(this.getLastIdx())}</figcaption></figure>`);
+    $(".thumbsContainer").append(`<figure class="imgCard" data-number="${this.getLastIdx()}"><img id="thumb${this.getLastIdx()}" data-number="${this.getLastIdx()}" src="${this.getLastThumbFName()}" alt="" class="imgThumb thumb-inaktiv"><figcaption data-number="${this.getLastIdx()}">${this.getImgTitle(this.getLastIdx())}</figcaption></figure>`);
   },
   getLastFileName: function() {
     // a legutolsó kép fájlnevét adja vissza elérési úttal
@@ -183,9 +183,17 @@ $(".green").on("click", (event) => {
   }
 });
 
-$(".thumbsContainer").on("click", ".imgThumb", function(event) {
-  let Idx = $(event.target).attr("id");
-  Idx = Idx.replace("thumb", "");
+$(".thumbsContainer").on("click", ".imgCard", function(event) {
+  let Idx = $(event.target).attr("data-number");
+  //Idx = Idx.replace("thumb", "");
+  if (Idx === appData.actImgIdx) { return; }
+  appData.setActImgIdx(Idx);
+});
+
+$(".thumbsContainer").on("click", "figcaption", function(event) {
+  let Idx = $(event.target).attr("data-number");
+  //Idx = Idx.replace("thumb", "");
+  if (Idx === appData.actImgIdx) { return; }
   appData.setActImgIdx(Idx);
 });
 

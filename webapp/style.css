@@ -88,10 +88,10 @@ body {
 
   filter: blur(20px);
   z-index: -1;
-  animation: animate 0.5s linear infinite;
+  animation: animateLoad 0.5s linear infinite;
 }
 
-@keyframes animate {
+@keyframes animateLoad {
   0% {
     transform: rotate(0deg);
   }
@@ -102,7 +102,6 @@ body {
 
 .viewer, .thumbs {
   position: fixed;
-  background: black;
   background-image: linear-gradient(200deg, rgba(213, 213, 213, 0.01) 0%, rgba(213, 213, 213, 0.01) 14.286%,rgba(140, 140, 140, 0.01) 14.286%, rgba(140, 140, 140, 0.01) 28.572%,rgba(52, 52, 52, 0.01) 28.572%, rgba(52, 52, 52, 0.01) 42.858%,rgba(38, 38, 38, 0.01) 42.858%, rgba(38, 38, 38, 0.01) 57.144%,rgba(159, 159, 159, 0.01) 57.144%, rgba(159, 159, 159, 0.01) 71.42999999999999%,rgba(71, 71, 71, 0.01) 71.43%, rgba(71, 71, 71, 0.01) 85.71600000000001%,rgba(88, 88, 88, 0.01) 85.716%, rgba(88, 88, 88, 0.01) 100.002%),linear-gradient(337deg, rgba(25, 25, 25, 0.01) 0%, rgba(25, 25, 25, 0.01) 12.5%,rgba(150, 150, 150, 0.01) 12.5%, rgba(150, 150, 150, 0.01) 25%,rgba(84, 84, 84, 0.01) 25%, rgba(84, 84, 84, 0.01) 37.5%,rgba(85, 85, 85, 0.01) 37.5%, rgba(85, 85, 85, 0.01) 50%,rgba(188, 188, 188, 0.01) 50%, rgba(188, 188, 188, 0.01) 62.5%,rgba(80, 80, 80, 0.01) 62.5%, rgba(80, 80, 80, 0.01) 75%,rgba(73, 73, 73, 0.01) 75%, rgba(73, 73, 73, 0.01) 87.5%,rgba(219, 219, 219, 0.01) 87.5%, rgba(219, 219, 219, 0.01) 100%),linear-gradient(203deg, rgba(233, 233, 233, 0.01) 0%, rgba(233, 233, 233, 0.01) 25%,rgba(114, 114, 114, 0.01) 25%, rgba(114, 114, 114, 0.01) 50%,rgba(164, 164, 164, 0.01) 50%, rgba(164, 164, 164, 0.01) 75%,rgba(228, 228, 228, 0.01) 75%, rgba(228, 228, 228, 0.01) 100%),linear-gradient(317deg, rgba(139, 139, 139, 0.02) 0%, rgba(139, 139, 139, 0.02) 16.667%,rgba(44, 44, 44, 0.02) 16.667%, rgba(44, 44, 44, 0.02) 33.334%,rgba(166, 166, 166, 0.02) 33.334%, rgba(166, 166, 166, 0.02) 50.001000000000005%,rgba(2, 2, 2, 0.02) 50.001%, rgba(2, 2, 2, 0.02) 66.668%,rgba(23, 23, 23, 0.02) 66.668%, rgba(23, 23, 23, 0.02) 83.33500000000001%,rgba(21, 21, 21, 0.02) 83.335%, rgba(21, 21, 21, 0.02) 100.002%),linear-gradient(328deg, rgba(3, 3, 3, 0.03) 0%, rgba(3, 3, 3, 0.03) 12.5%,rgba(116, 116, 116, 0.03) 12.5%, rgba(116, 116, 116, 0.03) 25%,rgba(214, 214, 214, 0.03) 25%, rgba(214, 214, 214, 0.03) 37.5%,rgba(217, 217, 217, 0.03) 37.5%, rgba(217, 217, 217, 0.03) 50%,rgba(68, 68, 68, 0.03) 50%, rgba(68, 68, 68, 0.03) 62.5%,rgba(118, 118, 118, 0.03) 62.5%, rgba(118, 118, 118, 0.03) 75%,rgba(200, 200, 200, 0.03) 75%, rgba(200, 200, 200, 0.03) 87.5%,rgba(198, 198, 198, 0.03) 87.5%, rgba(198, 198, 198, 0.03) 100%),linear-gradient(97deg, rgba(195, 195, 195, 0.03) 0%, rgba(195, 195, 195, 0.03) 16.667%,rgba(177, 177, 177, 0.03) 16.667%, rgba(177, 177, 177, 0.03) 33.334%,rgba(170, 170, 170, 0.03) 33.334%, rgba(170, 170, 170, 0.03) 50.001000000000005%,rgba(158, 158, 158, 0.03) 50.001%, rgba(158, 158, 158, 0.03) 66.668%,rgba(121, 121, 121, 0.03) 66.668%, rgba(121, 121, 121, 0.03) 83.33500000000001%,rgba(146, 146, 146, 0.03) 83.335%, rgba(146, 146, 146, 0.03) 100.002%),linear-gradient(268deg, rgba(103, 103, 103, 0.03) 0%, rgba(103, 103, 103, 0.03) 25%,rgba(112, 112, 112, 0.03) 25%, rgba(112, 112, 112, 0.03) 50%,rgba(4, 4, 4, 0.03) 50%, rgba(4, 4, 4, 0.03) 75%,rgba(227, 227, 227, 0.03) 75%, rgba(227, 227, 227, 0.03) 100%),linear-gradient(90deg, hsl(98,0%,0%),hsl(98,0%,0%));
   width: 70%;
   left: 15%;
@@ -312,32 +311,157 @@ body {
     0 0 4px green;
 }
 
-.imgCard, .imgThumb {
-  width: calc(((100vh * 0.2) -40px) / 1.618);
+.modCont {
+  width: calc(100% - 40px);
   height: 100%;
-}
-
-.imgCard {
-  margin: 0 5px 0;
-  cursor: pointer;
-  float: left;
-  transition: all 350ms ease;
-}
-
-.imgThumb {
-  object-fit: cover;
 }
 
 .thumbsContainer {
   position: absolute;
   height: 100%;
-  display: block;
+  display: flex;
   transition: all 100ms linear;
+  
+  /*box-shadow: 0 5px 10px rgba(0,0,0,0.8);*/
+  transform-origin: center top;
+  transform-style: preserve-3d;
+  transform: translateZ(0);
+  /*transition: 300ms;*/
+}
+
+.imgCard, .imgThumb {
+  margin: 0;
+  width: calc(((100vh * 0.2 * 0.8) -20px) / 1.333);
+}
+
+.imgThumb {
+  height: 100%;
+}
+
+.imgCard {
+  height: 80%;
+  margin: auto 10px auto 0;
+  cursor: pointer;
+  float: left;
+  transition: all 350ms ease;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+  position: relative;
+}
+
+.imgCard:after {
+  content: "";
+  z-index: 10;
+  width: 200%;
+  height: 100%;
+  top: -90%;
+  left: -20px;
+  opacity: 0.1;
+  transform: rotate(45deg);
+  background: linear-gradient(to top, transparent, #fff 15%, rgba(255,255,255,0.5));
+  transition: 300ms;
+}
+
+.imgCard:hover, .imgCard:active, .imgCard:focus {
+  box-shadow: 0 8px 16px 3px rgba(0,0,0,0.6);
+  transform: translateY(-3px) scale(1.1) rotateX(15deg);
+}
+
+.imgCard:hover:after, .imgCard:active:after, .imgCard:focus:after {
+  transform: rotate(25deg);
+  top: -40%;
+  opacity: 0.15;
+}
+
+.imgCard:hover figcaption, .imgCard:active figcaption, .imgCard:focus figcaption {
+  transform: none;
+}
+
+.imgThumb {
+  object-fit: cover;
+  overflow: hidden;
+}
+
+figcaption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px;
+  padding-bottom: 10px;
+  background: none;
+  text-shadow: 0 1px 1px rgba(#000, .3);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 10%, rgba(0, 0, 0, 0.5) 40%, rgba(0, 0, 0, 0.3) 70%, transparent);
+  transform: translateY(100%);
+  transition: 300ms;
 }
 
 /*
-font-family: 'Abril Fatface', cursive;
-font-family: 'Josefin Sans', sans-serif;
-font-family: 'Merriweather', serif;
-*/
+.cards
+    @extends .df
+    flex-flow row wrap
 
+    .card
+
+        // :focus and :active just added for a some android versions to simulate hover effect
+        &:hover, &:focus, &:active
+            box-shadow 0 8px 16px 3px rgba( #000, .6 )
+            transform translateY( -3px ) scale( 1.05 ) rotateX( 15deg )
+
+            figcaption
+                transform none
+
+            &:after
+                transform rotate( 25deg )
+                top -40%
+                opacity .15
+
+
+.news
+    @extends .cards
+
+    .article
+        @extends .rel
+        overflow hidden
+        width 350px
+        height 235px
+        margin 20px
+
+        img
+            width 100%
+            min-height 100%
+            transition .2s
+
+        figcaption
+            @extends .abs
+            font-size 14px
+            text-shadow 0 1px 0 rgba( #333, .3 )
+            color #fff
+            left 0
+            right 0
+            top 0
+            bottom 0
+            padding 40px
+            box-shadow 0 0 2px rgba( #000, .2 )
+            background rgba( #061235, .6 )
+            opacity 0
+            transform scale( 1.15 )
+            transition .2s
+
+            h3
+                color #3792e3
+                font-size 16px
+                margin-bottom 0
+                font-weight bold
+
+        // :focus and :active just added for a some android versions to simulate hover effect
+        &:hover, &:focus, &:active
+
+            img
+                filter blur( 3px )
+                transform scale( .97 )
+
+            figcaption
+                opacity 1
+                transform none
+*/

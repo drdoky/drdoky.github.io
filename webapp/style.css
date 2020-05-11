@@ -416,8 +416,8 @@ figcaption {
 }
 
 .help {
-  width: 30%;
-  height: 25%;
+  width: 380px;
+  height: 200px;
   left: 100%;
   border-radius: 0 0 0 30px;
 }
@@ -443,7 +443,7 @@ figcaption {
 }
 
 .htoggle:hover, .help:hover {
-  left: 70%;
+  left: calc(100% - 380px);
 }
 
 .help, .hinfo, .hinfo li {

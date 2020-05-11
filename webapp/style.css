@@ -412,6 +412,7 @@ figcaption {
   background: rgba(0, 0, 0, 0.7);
   cursor: pointer;
   transition: all 500ms ease;
+  box-shadow: -10px 20px 35px rgba(0, 0, 0, 0.7);
   z-index: 999;
 }
 

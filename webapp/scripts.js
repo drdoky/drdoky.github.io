@@ -130,6 +130,17 @@ var appData = {
     // ...és thumbnail-váltás
     $(".thumb-aktiv").toggleClass("thumb-aktiv thumb-inaktiv");
     $(`.thumb${Idx}`).toggleClass("thumb-aktiv thumb-inaktiv");
+  },
+  setActThumbCenter: function() {
+    $aktivImg = $(".thumb-aktiv");
+    $thumbsOuterCont = $(".modCont");
+    $thumbsInnerCont = $(".thumbsContainer");
+    let imgWidth = $aktivImg.width();
+    let imgIdx = $aktivImg.attr("data-number");
+    let thumbsWidth = $thumbsOuterCont.width();
+    let actImgCenter = ((imgWidth + 10) * imgIdx) + (imgWidth / 2);
+    let offsetLeft = -(actImgCenter - (thumbsWidth / 2));
+    $thumbsInnerCont.css("left", offsetLeft);
   }
 };
 
@@ -169,6 +180,7 @@ $(window).one("load", function() {
   // betöltő div eltüntetése
   appData.setActImgIdx(0)
   $(".thumbsContainer").width(($(".imgCard").length * ($(".imgCard").width() + 10)));
+  appData.setActThumbCenter();
   $(".loaderPage").hide();
 });
 
@@ -181,6 +193,7 @@ $(".green").on("click", (event) => {
       appData.nextImg();
       break;
   }
+  appData.setActThumbCenter();
 });
 
 $(".thumbsContainer").on("click", ".imgCard", function(event) {
@@ -219,7 +232,29 @@ $(".thumbs").mousemove(function(event){
   }
 });
 
+$(".thumbs").mouseleave(function() {
+  appData.setActThumbCenter();
+});
 
+$(document).keydown(function (event) {
+  let key = event.which;
+  //$(".info").text(key);
+  switch (key) {
+    case 88:  // x
+      $(".toggleInfo").click();
+      break;
+    case 37:  // balra nyíl
+      appData.prevImg();
+      appData.setActThumbCenter();
+      break;
+    case 39:  // jobbra nyíl
+      appData.nextImg();
+      appData.setActThumbCenter();
+      break;
+    default:
+      break;
+  }
+});
 
 
 /*

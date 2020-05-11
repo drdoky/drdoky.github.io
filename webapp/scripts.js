@@ -176,6 +176,9 @@ appData.addImg("pic20.jpg", "Sea at sunset", "Royal blue sky and sea shore at su
 appData.addImg("pic21.jpg", "Forest waterfall", "Forest waterfall with small lake.", "time-lapse-photo-of-water-falls-in-the-forest-3715436.jpg", "https://www.pexels.com/", "Free");
 appData.addImg("pic22.jpg", "The Sign", "Woman making conventional hand sign.", "woman-making-hand-sign-998850.jpg", "https://www.pexels.com/", "Free");
 
+var wheelCnt = 0;  // egérgörgő lassításához
+var timerID = null;  // diavetítés időzítője
+
 $(window).one("load", function() {
   // betöltő div eltüntetése
   appData.setActImgIdx(0)
@@ -251,9 +254,45 @@ $(document).keydown(function (event) {
       appData.nextImg();
       appData.setActThumbCenter();
       break;
+    case 32:  // space
+      appData.nextImg();
+      appData.setActThumbCenter();
+      break;
+    case 68:  // d
+    case 83:  // s
+      if (timerID != null) { break };
+      timerID = setInterval(function () {
+        appData.nextImg();
+        appData.setActThumbCenter();
+      }, 2500);
+      break;
+    case 27:  // esc
+      clearInterval(timerID);
+      timerID = null;
+      break;
     default:
       break;
   }
+});
+
+$(".actImgCont").on("wheel", function (event) {
+  let direction = event.originalEvent.wheelDelta;
+  if ((direction > 0) && (wheelCnt >= 0)) {
+    wheelCnt++;
+  } else if ((direction < 0) && (wheelCnt <= 0)) {
+    wheelCnt--;
+  } else {
+    wheelCnt = 0;
+  }
+  if (wheelCnt > 2) {
+    appData.nextImg();
+    wheelCnt = 0;
+  } 
+  if (wheelCnt < -2) {
+    appData.prevImg();
+    wheelCnt = 0;
+  }
+  appData.setActThumbCenter();
 });
 
 

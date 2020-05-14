@@ -42,13 +42,13 @@ var getRandDoor = function () {
   // (tehát az _mindenképp_ lefut, _legalább_ egyszer), majd
   // ellenőrzi, hogy kiléphet-e. Ha nem, akkor visszamegy, ismételni.
   // Egyszerűen megfogalmazva:
-  // Csináld/ismételd amíg... {ciklusmag} ...a feltétel nem teljesül!
+  // Csináld/ismételd amíg... {ciklusmag} ...a feltétel igaz!
   do {  // csináld/ismételd amíg...
     let temp = Math.floor(Math.random() * numDoors);  // véletlenszám
     if (doors[temp] !== "") {  // ha az ajtó még nincs törölve (azaz nincs nyitva)...
       doorIdx = temp;  // ...doorIdx beáll
     }
-  } while (doorIdx === -1);  // ...a feltétel nem teljesül
+  } while (doorIdx === -1);  // ...a feltétel igaz
   let path = doors[doorIdx];  // kimásoljuk az elérési utat
   doors[doorIdx] = "";  // töröljük a tömbben lévőt (nyitva)
   return path;  // visszatérünk a betöltendő útvonallal

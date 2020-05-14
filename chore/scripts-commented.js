@@ -48,7 +48,7 @@ var getRandDoor = function () {
     if (doors[temp] !== "") {  // ha az ajtó még nincs törölve (azaz nincs nyitva)...
       doorIdx = temp;  // ...doorIdx beáll
     }
-  } while (doorIdx === -1);  // ...a feltétel igaz
+  } while (doorIdx === -1);  // ...a doorIdx egyenlő az alaphelyzeti értékével (-1)
   let path = doors[doorIdx];  // kimásoljuk az elérési utat
   doors[doorIdx] = "";  // töröljük a tömbben lévőt (nyitva)
   return path;  // visszatérünk a betöltendő útvonallal

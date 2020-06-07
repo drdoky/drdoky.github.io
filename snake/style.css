@@ -30,6 +30,12 @@ body {
   transform: translate(-50%, -50%);
 }
 
+.help {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+}
+
 .score, .length, .gameover {
   position: absolute;
   font-size: 3em;
